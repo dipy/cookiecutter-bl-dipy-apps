@@ -1,0 +1,3 @@
+{
+    "command": "{{ cookiecutter.cli_name }}",
+}

@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=8
+#PBS -l vmem=20gb
+#PBS -l walltime=10:00:00
+
+export SINGULARITYENV_OMP_NUM_THREADS=7
+
+set -e
+set -x
+
+mkdir -p output
+chmod -R +w output
+
+time singularity exec -e docker://brainlife/dipy:{{cookiecutter.dipy_version}}  {{ cookiecutter.cli_name }} \
+    --force \
+    --out_dir output \
+    --b0_threshold $(jq -r .b0_threshold config.json) \
+    --bvecs_tol $(jq -r .bvecs_tol config.json) \
+    --extract_pam_values \
+    --sh_order $(jq -r .sh_order config.json) \
+    --odf_to_sh_order $(jq -r .odf_to_sh_order config.json) \
+    $(jq -r .dwi config.json) $(jq -r .bvals config.json) \
+    $(jq -r .bvecs config.json) $(jq -r .mask config.json)
+
+echo "done"

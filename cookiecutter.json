@@ -1,0 +1,9 @@
+{
+    "cli_name": "dipy_denoise_patch2self",
+    "directory_name": "{{ cookiecutter.cli_name|lower}}",
+    "author_full_name": "Shreyas Fadnavis",
+    "author_email": "",
+    "contributor_full_name": "Serge Koudoro",
+    "contributor_email": "",
+    "dipy_version": ["master", "1.1.1", "1.2.0", "1.3.0"]
+}
